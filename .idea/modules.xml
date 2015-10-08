@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/01_JDBC/01_JDBC.iml" filepath="$PROJECT_DIR$/01_JDBC/01_JDBC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/01_Thread/01_Thread.iml" filepath="$PROJECT_DIR$/01_Thread/01_Thread.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02_Atomic/02_Atomic.iml" filepath="$PROJECT_DIR$/02_Atomic/02_Atomic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02_SwingThreads/02_SwingThreads.iml" filepath="$PROJECT_DIR$/02_SwingThreads/02_SwingThreads.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03_Properties/03_Properties.iml" filepath="$PROJECT_DIR$/03_Properties/03_Properties.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04_Final/04_Final.iml" filepath="$PROJECT_DIR$/04_Final/04_Final.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NetworkInterfaces/NetworkInterfaces.iml" filepath="$PROJECT_DIR$/NetworkInterfaces/NetworkInterfaces.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebCalc/WebCalc.iml" filepath="$PROJECT_DIR$/WebCalc/WebCalc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java_09.iml" filepath="$PROJECT_DIR$/java_09.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webapp/webapp.iml" filepath="$PROJECT_DIR$/webapp/webapp.iml" />
+    </modules>
+  </component>
+</project>
