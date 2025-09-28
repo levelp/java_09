@@ -1,0 +1,97 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>levelp</groupId>
+    <artifactId>java_09</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+    <name>Java Junior Developer 9</name>
+    <description>Примеры для занятия 9</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>21</java.version>
+        <!-- Свойство для указания пути к файлу с данными о покрытии -->
+        <jacoco.execution.data.file>${project.build.directory}/jacoco.exec</jacoco.execution.data.file>
+    </properties>
+
+    <modules>
+        <module>01_JDBC</module>
+        <module>02_SwingThreads</module>
+        <module>NetworkInterfaces</module>
+        <module>webapp</module>
+        <module>WebCalc</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Maven Compiler Plugin: Компиляция Java кода с поддержкой Java 21 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+                <!-- Maven Resources Plugin: Копирование ресурсов с UTF-8 кодировкой -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+                <!-- Maven Surefire Plugin: Запуск тестов с поддержкой JaCoCo для покрытия кода -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.5.2</version>
+                    <configuration>
+                        <!-- Передаем argLine, установленный JaCoCo, в Surefire -->
+                        <argLine>${argLine}</argLine>
+                    </configuration>
+                </plugin>
+                <!-- JaCoCo Maven Plugin: Анализ покрытия кода тестами и генерация отчетов -->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.12</version>
+                    <executions>
+                        <!-- Первая задача: подготовить "агента" JaCoCo перед запуском тестов -->
+                        <execution>
+                            <id>prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <!-- Вторая задача: сгенерировать отчет после выполнения тестов -->
+                        <execution>
+                            <id>report</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>report-aggregate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <!-- Важно также добавить плагин в основную секцию build,
+             чтобы он действительно выполнялся для корневого проекта. -->
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

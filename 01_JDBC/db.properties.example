@@ -1,0 +1,7 @@
+# Database connection properties - Example file
+# Copy this file to db.properties and set your actual values
+# DO NOT commit db.properties to git!
+
+DB_URL=jdbc:postgresql://localhost:5432/postgres
+DB_USER=postgres
+DB_PASSWORD=your_password_here
