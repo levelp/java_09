@@ -18,6 +18,11 @@ abstract public class FileStorage extends AbstractStorage<File> {
 
     public FileStorage(String path) {
         this.dir = new File(path);
+        if (!dir.exists()) {
+            if (!dir.mkdirs()) {
+                throw new IllegalArgumentException("Cannot create directory '" + path + "'");
+            }
+        }
         if (!dir.isDirectory() || !dir.canWrite())
             throw new IllegalArgumentException("'" + path + "' is not directory or is not writable");
     }

@@ -20,18 +20,7 @@ public class Config {
     public static final IStorage XML_STORAGE;
 
     static {
-        String webappRoot = System.getenv("WEBAPP_ROOT");
-        if (webappRoot == null) {
-            try {
-                webappRoot = new File("webapp").getCanonicalPath();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        if (webappRoot == null) {
-            throw new IllegalStateException("Define environment variable WEBAPP_ROOT");
-        }
-        File webappRootDir = new File(webappRoot);
+        File webappRootDir = findWebappRootDir();
         Properties props = new Properties();
         try (FileInputStream webappProps = new FileInputStream(new File(webappRootDir, "config/webapp.properties"));
              FileInputStream logProps = new FileInputStream(new File(webappRootDir, "config/logging.properties"))) {
@@ -53,6 +42,32 @@ public class Config {
             e.printStackTrace();
             throw new IllegalStateException(e);
         }
+    }
+
+    private static File findWebappRootDir() {
+        // Try multiple approaches to find webapp root directory
+        File currDir = new File(".");
+
+        // Strategy 1: Look for webapp directory in current or parent directories
+        File tempDir = currDir;
+        while (tempDir != null && !new File(tempDir, "webapp").exists()) {
+            tempDir = tempDir.getParentFile();
+        }
+        if (tempDir != null) {
+            return new File(tempDir, "webapp");
+        }
+
+        // Strategy 2: Check if we're already in webapp directory
+        if (new File(currDir, "config/webapp.properties").exists()) {
+            return currDir;
+        }
+
+        // Strategy 3: Check if we're in the project root
+        if (new File(currDir, "webapp/config/webapp.properties").exists()) {
+            return new File(currDir, "webapp");
+        }
+
+        throw new IllegalStateException("Cannot find webapp root directory");
     }
 
     public static IStorage getStorage() {

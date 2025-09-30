@@ -19,6 +19,9 @@ import java.util.UUID;
 public class Resume implements Comparable<Resume>, Serializable {
     public static final Resume EMPTY;
     static final long serialVersionUID = 1L;
+    public static final int MAX_NAME_LENGTH = 255;
+    public static final int MAX_SECTION_ITEMS = 100;
+    private static final java.util.regex.Pattern EMOJI_PATTERN = java.util.regex.Pattern.compile("[\\x{1F600}-\\x{1F64F}\\x{1F300}-\\x{1F5FF}\\x{1F680}-\\x{1F6FF}\\x{1F700}-\\x{1F77F}\\x{1F780}-\\x{1F7FF}\\x{1F800}-\\x{1F8FF}\\x{1F900}-\\x{1F9FF}\\x{1FA00}-\\x{1FA6F}\\x{1FA70}-\\x{1FAFF}\\x{2600}-\\x{26FF}\\x{2700}-\\x{27BF}]");
 
     static {
         EMPTY = new Resume();
@@ -42,7 +45,7 @@ public class Resume implements Comparable<Resume>, Serializable {
 
     public Resume(String uuid, String fullName, String location) {
         this.uuid = uuid;
-        this.fullName = fullName;
+        setFullName(fullName);
         setLocation(location);
     }
 
@@ -63,7 +66,20 @@ public class Resume implements Comparable<Resume>, Serializable {
     }
 
     public void setFullName(String fullName) {
-        this.fullName = fullName;
+        if (fullName == null) {
+            throw new IllegalArgumentException("Имя обязательно для заполнения");
+        }
+        if (fullName.isEmpty()) {
+            throw new IllegalArgumentException("Имя не может быть пустым");
+        }
+        if (fullName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Имя не может состоять только из пробелов");
+        }
+        if (fullName.length() > MAX_NAME_LENGTH) {
+            throw new IllegalArgumentException("Имя слишком длинное");
+        }
+        // Remove emoji characters
+        this.fullName = EMOJI_PATTERN.matcher(fullName).replaceAll("").trim();
     }
 
     public String getLocation() {
@@ -91,6 +107,9 @@ public class Resume implements Comparable<Resume>, Serializable {
     }
 
     public void addContact(ContactType type, String value) {
+        if (value == null || value.trim().isEmpty()) {
+            return;
+        }
         contacts.put(type, value);
     }
 

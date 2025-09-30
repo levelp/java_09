@@ -7,6 +7,7 @@ import webapp.WebAppException;
 import webapp.model.ContactType;
 import webapp.model.Resume;
 
+import java.io.File;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class StorageTest {
 
-    public static final String STORAGE_DIR = "./file_storage";
+    public static final String STORAGE_DIR = new File(System.getProperty("java.io.tmpdir"), "webapp_test_storage").getAbsolutePath();
     static IStorage storage;
     private static Resume R1, R2, R3;
 

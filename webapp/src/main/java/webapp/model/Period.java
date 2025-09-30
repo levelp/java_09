@@ -24,6 +24,9 @@ public class Period implements Serializable {
     }
 
     public Period(Date startDate, Date endDate, String position, String content) {
+        if (startDate != null && endDate != null && endDate.before(startDate)) {
+            throw new IllegalArgumentException("Дата окончания не может быть раньше даты начала");
+        }
         this.startDate = startDate;
         this.endDate = endDate;
         this.position = position;
