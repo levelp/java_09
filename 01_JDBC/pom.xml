@@ -78,7 +78,7 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.6.29.Final</version>
+            <version>6.6.30.Final</version>
         </dependency>
 
         <!-- SQLite JDBC: Драйвер для работы со встроенной базой данных SQLite -->
